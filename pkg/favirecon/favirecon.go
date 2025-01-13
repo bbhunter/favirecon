@@ -140,22 +140,23 @@ func execute(r *Runner) {
 			for value := range r.Input {
 				targetURL, err := PrepareURL(value)
 				if err != nil {
-					if r.Options.Verbose {
-						gologger.Error().Msgf("%s", err)
-					}
+					gologger.Error().Msgf("%s", err)
 
 					return
 				}
 
 				rl.Take()
 
-				client := customClient(r.Options.Timeout)
+				client, err := customClient(&r.Options)
+				if err != nil {
+					gologger.Error().Msgf("%s", err)
+
+					return
+				}
 
 				result, err := getFavicon(targetURL, r.UserAgent, client)
 				if err != nil {
-					if r.Options.Verbose {
-						gologger.Error().Msgf("%s", err)
-					}
+					gologger.Error().Msgf("%s", err)
 
 					return
 				}
@@ -200,6 +201,15 @@ func writeOutput(wg *sync.WaitGroup, m *sync.Mutex, options *input.Options, o ou
 	m.Lock()
 
 	out := o.Format()
+
+	if options.JSON {
+		outJSON, err := o.FormatJSON()
+		if err != nil {
+			gologger.Fatal().Msg(err.Error())
+		}
+
+		out = string(outJSON)
+	}
 
 	if options.Output != nil {
 		if _, err := options.Output.Write([]byte(out + "\n")); err != nil && options.Verbose {

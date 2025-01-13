@@ -12,7 +12,7 @@ import "github.com/projectdiscovery/gologger"
 var printed = false
 
 const (
-	Version = "v0.0.7"
+	Version = "v0.1.3"
 	banner  = `    ____            _                          
    / __/___  __  __(_)_______  _________  ____ 
   / /_/ __ ` + `\/ | / / / ___/ _ \/ ___/ __ \/ __ \
@@ -24,7 +24,7 @@ const (
 func ShowBanner() {
 	if !printed {
 		gologger.Print().Msgf("%s%s\n\n", banner, Version)
-		gologger.Print().Msgf("\t\t@edoardottt, https://www.edoardoottavianelli.it/\n")
+		gologger.Print().Msgf("\t\t@edoardottt, https://edoardottt.com/\n")
 		gologger.Print().Msgf("\t\t             https://github.com/edoardottt/\n\n")
 
 		printed = true

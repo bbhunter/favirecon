@@ -42,13 +42,19 @@
 Install 📡
 ----------
 
-### Using Snap
+### Homebrew
+
+```console
+brew install favirecon
+```
+
+### Snap
 
 ```console
 sudo snap install favirecon
 ```
 
-### Using Go
+### Go
 
 ```console
 go install github.com/edoardottt/favirecon/cmd/favirecon@latest
@@ -72,11 +78,13 @@ CONFIGURATIONS:
    -c, -concurrency int  Concurrency level (default 50)
    -t, -timeout int      Connection timeout in seconds (default 10)
    -rl, -rate-limit int  Set a rate limit (per second)
+   -px, -proxy string    Set a proxy server (URL)
 
 OUTPUT:
    -o, -output string  File to write output results
    -v, -verbose        Verbose output
    -s, -silent         Silent output. Print only results
+   -j, -json           JSON output
 ```
 
 Examples 💡
@@ -114,6 +122,18 @@ Grab all possible results from single CIDR
 favirecon -u 192.168.1.0/24 -cidr
 ```
 
+Use a Proxy
+
+```console
+favirecon -u https://www.github.com -px http://127.0.0.1:8080
+```
+
+JSON Output
+
+```console
+favirecon -u https://www.github.com -j
+```
+
 Changelog 📌
 -------
 
@@ -141,4 +161,4 @@ License 📝
 -------
 
 This repository is under [MIT License](https://github.com/edoardottt/favirecon/blob/main/LICENSE).  
-[edoardoottavianelli.it](https://www.edoardoottavianelli.it) to contact me.
+[edoardottt.com](https://edoardottt.com/) to contact me.

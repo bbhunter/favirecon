@@ -37,6 +37,8 @@ type Options struct {
 	Timeout     int
 	Cidr        bool
 	RateLimit   int
+	Proxy       string
+	JSON        bool
 }
 
 // configureOutput configures the output on the screen.
@@ -67,6 +69,7 @@ func ParseOptions() *Options {
 		flagSet.IntVarP(&options.Concurrency, "concurrency", "c", DefaultConcurrency, `Concurrency level`),
 		flagSet.IntVarP(&options.Timeout, "timeout", "t", DefaultTimeout, `Connection timeout in seconds`),
 		flagSet.IntVarP(&options.RateLimit, "rate-limit", "rl", DefaultRateLimit, `Set a rate limit (per second)`),
+		flagSet.StringVarP(&options.Proxy, "proxy", "px", "", `Set a proxy server (URL)`),
 	)
 
 	// Output
@@ -74,6 +77,7 @@ func ParseOptions() *Options {
 		flagSet.StringVarP(&options.FileOutput, "output", "o", "", `File to write output results`),
 		flagSet.BoolVarP(&options.Verbose, "verbose", "v", false, `Verbose output`),
 		flagSet.BoolVarP(&options.Silent, "silent", "s", false, `Silent output. Print only results`),
+		flagSet.BoolVarP(&options.JSON, "json", "j", false, `JSON output`),
 	)
 
 	if help() || noArgs() {
